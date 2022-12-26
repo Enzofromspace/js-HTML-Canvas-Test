@@ -17,7 +17,16 @@ let lastX = 0;
 let lastY = 0;
 
 function draw(e){
+  if(!isDrawing) return; // stop func if no mouse down
   console.log(e);
+  ctx.beginPath();
+  ctx.beginPath(lastX,lastY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
 }
 
 canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousedown', () => isDrawing = true);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
